@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    [SerializeField] private Animator _animator;
 
     private float _previousMousPosition;
     private float _eulerAngleY;
@@ -21,6 +22,7 @@ public class PlayerMover : MonoBehaviour
             SetPosition();
             SetAngle();
         }
+        SetAnimation();
     }
 
     private void SetPosition()
@@ -41,5 +43,16 @@ public class PlayerMover : MonoBehaviour
         _eulerAngleY += deltaX;
         _eulerAngleY = Mathf.Clamp(_eulerAngleY, -70, 70);
         transform.eulerAngles = new Vector3(0, _eulerAngleY, 0);
+    }
+    private void SetAnimation()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _animator.SetBool("IsRunning", true);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _animator.SetBool("IsRunning", false);
+        }
     }
 }
