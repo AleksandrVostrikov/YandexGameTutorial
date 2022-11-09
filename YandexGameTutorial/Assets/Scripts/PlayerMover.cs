@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
@@ -9,6 +7,7 @@ public class PlayerMover : MonoBehaviour
 
     private float _previousMousPosition;
     private float _eulerAngleY;
+
 
     private void Update()
     {
