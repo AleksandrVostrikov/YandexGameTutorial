@@ -4,9 +4,13 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private Animator _animator;
+    
 
     private float _previousMousPosition;
     private float _eulerAngleY;
+
+    public delegate void CoinPicked();
+    public event CoinPicked collideWithCoin;
 
 
     private void Update()
@@ -22,6 +26,14 @@ public class PlayerMover : MonoBehaviour
             SetAngle();
         }
         SetAnimation();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Coin")
+        {
+            collideWithCoin?.Invoke();
+        }
     }
 
     private void SetPosition()
