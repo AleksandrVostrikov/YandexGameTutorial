@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -30,7 +31,7 @@ public class PlayerMover : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Coin")
+        if (other.gameObject.tag == GameNames.Coin.ToString())
         {
             collideWithCoin?.Invoke();
         }
