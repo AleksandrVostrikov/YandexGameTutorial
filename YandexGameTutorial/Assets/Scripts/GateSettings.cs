@@ -22,23 +22,15 @@ public class GateSettings : MonoBehaviour
     [SerializeField] private GameObject _upLable;
     [SerializeField] private GameObject _downLable;
 
-    [SerializeField] private GameObject _imageTop;
-
     [SerializeField] private int _value;
 
     private List<Transform> _gateType;
 
     const float _alpha = 0.5f;
 
-
-
     private void OnValidate()
     {
-        _gateType = _imageTop.GetComponents<Transform>().ToList();
-        foreach (Transform s in _gateType)
-        {
-            s.gameObject.SetActive(false);
-        }
+        SetFalseTopObjects();
         ChangeGate();
     }
 
@@ -53,6 +45,36 @@ public class GateSettings : MonoBehaviour
         {
             SetColor(_negativeColor);
         }
+        if (_deformationType == GateDeformationType.Height)
+        {
+            if (_value >= 0)
+            {
+                _expandLable.SetActive(true);
+            }
+            else
+            {
+                _shrinkLable.SetActive(true);
+            }
+        }
+        else
+        {
+            if (_value >= 0)
+            {
+                _upLable.SetActive(true);
+            }
+            else
+            {
+                _downLable.SetActive(true);
+            }
+        }
+    }
+
+    private void SetFalseTopObjects()
+    {
+        _expandLable.SetActive(false);
+        _shrinkLable.SetActive(false);
+        _upLable.SetActive(false);
+        _downLable.SetActive(false);
     }
 
     private void SetColor(Color color)
